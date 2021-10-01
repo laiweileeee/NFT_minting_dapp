@@ -1,4 +1,4 @@
-# Welcome to HashLips 👄
+# Simple NFT minting dapp forked from HashLip 👄
 
 ![](https://github.com/HashLips/hashlips_nft_minting_dapp/blob/main/logo.png)
 
