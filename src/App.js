@@ -9,14 +9,14 @@ const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
 
 export const StyledButton = styled.button`
-  padding: 10px;
   border-radius: 50px;
   border: none;
   background-color: var(--secondary);
-  padding: 10px;
+  padding: 15px;
   font-weight: bold;
+  font-size: 15px;
   color: var(--secondary-text);
-  width: 100px;
+  width: 125px;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
@@ -37,8 +37,8 @@ export const StyledRoundButton = styled.button`
   font-weight: bold;
   font-size: 15px;
   color: var(--primary-text);
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -75,16 +75,16 @@ export const StyledLogo = styled.img`
 `;
 
 export const StyledImg = styled.img`
-  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
-  border: 4px dashed var(--secondary);
-  background-color: var(--accent);
+  box-shadow: 0px 5px 5px 20px rgba(0, 0, 0, 0.1);
+  //border: 4px var(--secondary);
+  //background-color: var(--accent);
   border-radius: 100%;
-  width: 200px;
+  width: 100px;
   @media (min-width: 900px) {
-    width: 250px;
+    width: 125px;
   }
   @media (min-width: 1000px) {
-    width: 300px;
+    width: 150px;
   }
   transition: width 0.5s;
 `;
@@ -99,7 +99,7 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
+  const [feedback, setFeedback] = useState(`Click BUY to mint your NFT.`);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
@@ -162,8 +162,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 10) {
-      newMintAmount = 10;
+    if (newMintAmount > 5) {
+      newMintAmount = 5;
     }
     setMintAmount(newMintAmount);
   };
@@ -198,28 +198,31 @@ function App() {
       <s.Container
         flex={1}
         ai={"center"}
-        style={{ padding: 24, backgroundColor: "var(--primary)" }}
+        style={{ padding: 24, }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
-        <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
+        {/*<StyledLogo alt={"logo"} src={"/config/images/logo.png"} />*/}
+        <StyledImg alt={"example"} src={"/config/images/eyes.png"} />
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"example"} src={"/config/images/example.gif"} />
+            {/*<StyledImg alt={"example"} src={"/config/images/eyes.png"} />*/}
           </s.Container>
           <s.SpacerLarge />
           <s.Container
-            flex={2}
+            flex={1}
             jc={"center"}
             ai={"center"}
             style={{
-              backgroundColor: "var(--accent)",
+              backgroundColor: "#200033",
+              // background: `linear-gradient(to right, #3a7bd5, #3a6073)`, /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
               padding: 24,
               borderRadius: 24,
-              border: "4px dashed var(--secondary)",
-              boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
+              border: "4px var(--secondary)",
+              boxShadow: "0px 3px 11px 2px rgba(0,0,0,0.2)",
             }}
           >
+            <s.SpacerMedium />
             <s.TextTitle
               style={{
                 textAlign: "center",
@@ -228,7 +231,7 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
-              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+              {data.totalSupply} / {CONFIG.MAX_SUPPLY} Minted
             </s.TextTitle>
             <s.TextDescription
               style={{
@@ -237,7 +240,7 @@ function App() {
               }}
             >
               <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
+                View contract on Polyscan
               </StyledLink>
             </s.TextDescription>
             <s.SpacerSmall />
@@ -263,8 +266,8 @@ function App() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
-                  {CONFIG.NETWORK.SYMBOL}.
+                  Get your {CONFIG.SYMBOL} now for {CONFIG.DISPLAY_COST}{" "}
+                  {CONFIG.NETWORK.SYMBOL} each!
                 </s.TextTitle>
                 <s.SpacerXSmall />
                 <s.TextDescription
@@ -350,7 +353,7 @@ function App() {
                         +
                       </StyledRoundButton>
                     </s.Container>
-                    <s.SpacerSmall />
+                    <s.SpacerMedium />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledButton
                         disabled={claimingNft ? 1 : 0}
@@ -371,11 +374,11 @@ function App() {
           </s.Container>
           <s.SpacerLarge />
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg
-              alt={"example"}
-              src={"/config/images/example.gif"}
-              style={{ transform: "scaleX(-1)" }}
-            />
+            {/*<StyledImg*/}
+            {/*  alt={"example"}*/}
+            {/*  src={"/config/images/eyes.png"}*/}
+            {/*  style={{ transform: "scaleX(-1)" }}*/}
+            {/*/>*/}
           </s.Container>
         </ResponsiveWrapper>
         <s.SpacerMedium />
@@ -387,19 +390,19 @@ function App() {
             }}
           >
             Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
-            Once you make the purchase, you cannot undo this action.
+            {CONFIG.NETWORK.NAME} Mainnet) and the correct address.
           </s.TextDescription>
           <s.SpacerSmall />
           <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
+              style={{
+                textAlign: "center",
+                color: "var(--primary-text)",
+              }}
           >
-            We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
-            successfully mint your NFT. We recommend that you don't lower the
-            gas limit.
+            Base source code for Front-End, Solidity Contract written by HashLips {' '}
+            <StyledLink target={"_blank"} href={"https://github.com/HashLips"}>
+              https://github.com/HashLips
+            </StyledLink>
           </s.TextDescription>
         </s.Container>
       </s.Container>
