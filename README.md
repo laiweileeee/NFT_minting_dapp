@@ -1,6 +1,4 @@
-# Simple NFT minting dapp forked from HashLips 👄
-
-![](https://github.com/HashLips/hashlips_nft_minting_dapp/blob/main/logo.png)
+# Simple NFT minting dapp forked from HashLips �
 
 All the code in these repos was created and explained by HashLips on the main YouTube channel.
 
